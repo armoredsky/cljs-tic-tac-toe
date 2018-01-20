@@ -12,9 +12,9 @@
         :x [:span "X"]
         :o [:span "O"]
         (if @w
-        [:span " "]
-        [:button {:on-click #(re-frame/dispatch [::events/move x y])} " "]
-        )))))
+          [:span " "]
+          [:button {:on-click #(re-frame/dispatch [::events/move x y])} " "]
+          )))))
 
 (defn grid []
   [:table
@@ -43,5 +43,7 @@
         db (re-frame/subscribe [::subs/db])]
     [:div (title @turn @winner)
       [:div [grid]
+      [:button {:on-click #(re-frame/dispatch [::events/initialize-db])}
+       "RESET"]
         [:div
          (pr-str @db)]]]))
