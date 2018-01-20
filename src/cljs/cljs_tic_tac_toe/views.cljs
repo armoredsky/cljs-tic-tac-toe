@@ -5,13 +5,16 @@
             ))
 
 (defn cell [x y]
-  (let [c (re-frame/subscribe [::subs/cell x y])]
+  (let [c (re-frame/subscribe [::subs/cell x y])
+        w (re-frame/subscribe [::subs/winner])]
     (fn []
       (case @c
         :x [:span "X"]
         :o [:span "O"]
-          [:button {:on-click #(re-frame/dispatch [::events/move x y])}
-           " "]))))
+        (if @w
+        [:span " "]
+        [:button {:on-click #(re-frame/dispatch [::events/move x y])} " "]
+        )))))
 
 (defn grid []
   [:table
