@@ -25,9 +25,9 @@
           [cell x y]])])]])
 
 (defn main-panel []
-  (let [name (re-frame/subscribe [::subs/name])
+  (let [turn (re-frame/subscribe [::subs/turn])
         db (re-frame/subscribe [::subs/db])]
-    [:div "Hello from " @name
+    [:div (str "it is " (if (= :x @turn) "X" "O") "'s turn")
       [:div [grid]
         [:div
          (pr-str @db)]]]))

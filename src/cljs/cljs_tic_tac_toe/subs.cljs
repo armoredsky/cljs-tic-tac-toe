@@ -2,9 +2,9 @@
   (:require [re-frame.core :as re-frame]))
 
 (re-frame/reg-sub
- ::name
+ ::turn
  (fn [db]
-   (:name db)))
+   (:turn db)))
 
  (re-frame/reg-sub
   ::db
