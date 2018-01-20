@@ -19,7 +19,9 @@
     (for [y (range 3)]
     [:tr {:key (str "y-" y)}
       (for [x (range 3)]
-        [:td {:key (str "x-" x)}
+        [:td {:key (str "x-" x) :style {:width 30
+                                :height 30
+                                :text-align :center}}
           [cell x y]])])]])
 
 (defn main-panel []
