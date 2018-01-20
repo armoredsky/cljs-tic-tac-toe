@@ -1,6 +1,7 @@
 (ns cljs-tic-tac-toe.views
   (:require [re-frame.core :as re-frame]
             [cljs-tic-tac-toe.subs :as subs]
+            [cljs-tic-tac-toe.events :as events]
             ))
 
 (defn cell [x y]
@@ -9,7 +10,7 @@
       (case @c
         :x [:span "X"]
         :o [:span "O"]
-          [:button {:on-click #()}
+          [:button {:on-click #(re-frame/dispatch [::events/move x y])}
            "click"]))))
 
 (defn grid []
@@ -19,7 +20,7 @@
     [:tr {:key (str "y-" y)}
       (for [x (range 3)]
         [:td {:key (str "x-" x)}
-          "[cell x y]"])])]])
+          [cell x y]])])]])
 
 (defn main-panel []
   (let [name (re-frame/subscribe [::subs/name])
