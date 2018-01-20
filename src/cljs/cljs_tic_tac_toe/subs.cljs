@@ -5,3 +5,13 @@
  ::name
  (fn [db]
    (:name db)))
+
+ (re-frame/reg-sub
+  ::db
+  (fn [db]
+    db))
+
+(re-frame/reg-sub
+  ::cell
+  (fn [db [_ x y]]
+     (get-in @db [:board [x y]])))
