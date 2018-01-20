@@ -5,6 +5,10 @@
  ::turn
  (fn [db]
    (:turn db)))
+ (re-frame/reg-sub
+  ::winner
+  (fn [db]
+    (:winner db)))
 
  (re-frame/reg-sub
   ::db

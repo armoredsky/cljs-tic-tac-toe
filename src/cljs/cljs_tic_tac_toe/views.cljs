@@ -11,7 +11,7 @@
         :x [:span "X"]
         :o [:span "O"]
           [:button {:on-click #(re-frame/dispatch [::events/move x y])}
-           "click"]))))
+           " "]))))
 
 (defn grid []
   [:table
@@ -24,10 +24,21 @@
                                 :text-align :center}}
           [cell x y]])])]])
 
+(defn title [turn winner]
+  (let [w (case winner
+                  :x "X"
+                  :o "O"
+                  nil)
+        t (if (= :x turn) "X" "O")]
+  (if (not (empty? w))
+    (str "The Winner is " w)
+    (str "it is " (if (= :x t) "X" "O") "'s turn"))))
+
 (defn main-panel []
   (let [turn (re-frame/subscribe [::subs/turn])
+        winner (re-frame/subscribe [::subs/winner])
         db (re-frame/subscribe [::subs/db])]
-    [:div (str "it is " (if (= :x @turn) "X" "O") "'s turn")
+    [:div (title @turn @winner)
       [:div [grid]
         [:div
          (pr-str @db)]]]))
